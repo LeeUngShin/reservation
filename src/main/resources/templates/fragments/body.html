@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <body th:fragment="main-body">
+    <header>
+      헤더부분입니다.
+    </header>
+    <nav>
+      메뉴바 부분입니다.
+    </nav>
+    <section>
+      <article>
+        아티클 1번 부분입니다.
+      </article>
+      <article>
+        아티클 2번 부분입니다.
+      </article>
+    </section>
+    <foot>
+      푸터부분입니다.
+    </foot>
+
+    <script th:src="@{/js/common.js}"></script>
+    <th:block layout:fragment="add-script"></th:block>
+  </body>
+
+</html>
