@@ -37,7 +37,7 @@ public class DBConfiguration {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();  // SQL 실행, 트랜젝션 관리 등 담당
         factoryBean.setDataSource(dataSource());
         factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));  // mybatis의 xml 파일 경로
-        factoryBean.setTypeAliasesPackage("com.example.demo.*");  // mybatis에서 사용할 DTO클래스의 패키지 경로
+        factoryBean.setTypeAliasesPackage("com.example.reservation.*");
         factoryBean.setConfiguration(mybatisConfg());
         return factoryBean.getObject();
     }
