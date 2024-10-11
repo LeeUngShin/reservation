@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="board/layout/basic">
+<head th:replace="board/fragments/header :: main-head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<form th:if="#{not #maps.isEmpty(params)}" name="dataForm" th:action="${redirectUri}" th:method="${method}" style="display : none;">
+		<input th:each="key, status : ${params.keySet()}" type="hidden" th:name="${key}" th:value="${params.get(key)}"/>
+	</form>
+	
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			window.onload = function(){
+				var message = /*[[${message}]]*/ null;
+				console.log("message : " + message);
+				if(isEmpty(message) == false){
+					console.log("message가 비어있지 않음");
+					alert(message);
+				}
+				
+				var params = /*[[${params}]]*/ null;
+				console.log("params : " + params);
+				if(isEmpty(params) == false){
+					console.log("params가 비어있지 않음");
+					document.dataForm.submit();
+				} else{
+					var redirectUri = /*[[${redirectUri}]]*/ null;
+					console.log("redirectUri : " + redirectUri);
+					console.log("params가 비어있음");
+					location.href = redirectUri;
+				}
+			}
+			
+		</script>
+</body>
+</html>

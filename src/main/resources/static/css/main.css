@@ -1,0 +1,59 @@
+/* 커러셀 높이 조절 */
+.carousel-inner {
+    width: 100vm;
+    height: 350px; /* 이미지 높이 변경 */
+}
+
+.carousel-item {
+    width: 100vm;
+    height: 100%;
+}
+
+.d-block {
+    display: block;
+    width: 100vm;
+    height: 100%;
+}
+
+/*선택바*/
+#choice{
+    height: 100px;
+    width: 80%;
+    border: gray solid 6px;
+    margin: 0 auto;
+    border-radius: 30px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    position : relative;
+}
+
+/*지역선택*/
+.choice{
+    cursor: pointer;
+}
+
+.region {
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 110px;
+    width: 400px;
+    background-color: #e0e0e0;
+    z-index: 10;
+}
+
+.btn-light{
+    margin : 5px;
+}
+
+/*공간유형*/
+#type{
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 110px;
+    width: 300px;
+    background-color: #e0e0e0;
+    z-index: 10;
+}

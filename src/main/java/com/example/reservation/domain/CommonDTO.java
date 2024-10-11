@@ -1,5 +1,6 @@
 package com.example.reservation.domain;
 
+import com.example.reservation.paging.Criteria;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonDTO {
+public class CommonDTO extends Criteria {
 
     // private PaginationInfo paginationInfo;
     private String delete_yn;

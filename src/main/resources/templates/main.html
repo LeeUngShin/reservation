@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{css/main.css}"/>
+</th:block>
+<th:block layout:fragment="title">
+    <title>메인페이지</title>
+</th:block>
+<section>
+    <th:block layout:fragment="content">
+        <article id="article01">
+            <div>article01</div>
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img th:src="@{img/carousel01.PNG}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src="@{img/carousel02.PNG}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src="@{img/carousel03.PNG}" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </article>
+        <article id="article02">
+            <div>article02</div>
+            <div class="container text-center">
+                <div id="choice" class="row">
+                    <div id="regionChoice" class="choice col">
+                        지역선택
+                        <span id="a"></span>
+                        <span id="b"></span>
+                    </div>
+                    <div id="big_region" class="region">
+                        <span style="display : inline-block; margin-top : 5px; margin-left : 5px;">시/도 선택</span> >
+                        <span style="display : inline-block; margin-top : 5px;">시/군/구 선택</span>
+                        <hr>
+                        <button type="button" class="btn btn-light" onclick="choiceBigRegion('서울')">서울</button>
+                        <button type="button" class="btn btn-light" onclick="choiceBigRegion('경기')">경기</button>
+                        <button type="button" class="btn btn-light" onclick="choiceBigRegion('인천')">인천</button>
+                    </div>
+                    <div id="small_region" class="region"></div>
+                    <div th:text="유형선택" id="typeChoice" class="choice col" onclick="toggleTypeChoice()"></div>
+                    <div id="type">
+                        <span style="display : inline-block; margin-top : 5px; margin-left : 5px;" onclick="tType()">유형 선택</span> >
+                        <hr>
+                        <button type="button" class="btn btn-light" onclick="choiceType('실내')">실내</button>
+                        <button type="button" class="btn btn-light" onclick="choiceType('야외')">야외</button>
+                    </div>
+
+                    <div class="col">
+                        <button type="button" class="btn btn-light" style="width : 80%;" onclick="submitChoice()">검색하기</button>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+        <article id="article03">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </th:block>
+</section>
+    <th:block  layout:fragment="add-script">
+        <script th:inline="javascript">
+
+            const regionChoice = document.getElementById('regionChoice');
+            const bigRegion = document.getElementById('big_region');
+            const smallRegion = document.getElementById('small_region');
+            const typeChoice = document.getElementById('typeChoice');
+            const type = document.getElementById('type');
+
+
+            function toggleRegionChoice() {  // 지역 대분류 보이게 하기
+                if (bigRegion.style.display === 'none' || bigRegion.style.display === '') {
+                    console.log("지역 대분류 논");
+                    bigRegion.style.display = 'block';
+                    smallRegion.style.display = 'none';
+                    type.style.display = 'none';
+                } else {
+                    console.log("지역 대분류 블락");
+                    bigRegion.style.display = 'none';
+                }
+            }
+
+            regionChoice.addEventListener('click', toggleRegionChoice);
+
+            const regions = {
+                '서울': ['강남구', '서초구', '송파구', '강동구', '강서구', '양천구', '구로구', '영등포구', '금천구', '동작구', '관악구', '서대문구', '은평구', '마포구', '용산구', '중구', '종로구', '동대문구', '성동구', '광진구', '중랑구', '노원구', '도봉구', '강북구'],
+                '경기': ['수원시', '성남시', '의정부시', '안양시', '부천시', '광명시', '평택시', '동두천시', '안산시', '고양시', '과천시', '구리시', '남양주시', '오산시', '시흥시', '군포시', '의왕시', '하남시', '용인시', '파주시', '이천시', '안성시', '김포시', '화성시', '광주시', '양주시', '포천시', '여주시'],
+                '인천': ['중구', '동구', '미추홀구', '연수구', '남동구', '부평구', '계양구', '서구', '강화군', '옹진군']
+            };
+
+
+            function choiceBigRegion(region){  // 지역 대분류 선택 시 이 함수 호출, () 안에는 대분류 값
+                bigRegion.style.display = 'none';
+                smallRegion.innerHTML = `
+                    <span id="Metropolitan" style="display: inline-block; margin-top: 5px; margin-left: 5px;">${region}</span> >
+                    <span style="display: inline-block; margin-top: 5px;">시/군/구 선택</span>
+                    <hr>
+                    `;
+
+                regions[region].forEach(subRegion => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'btn btn-light';
+                    button.textContent = subRegion;
+                    button.onclick = () => choiceSmallRegion(region, subRegion);  // 지역 소분류 선택 시 이 함수 호출
+                    smallRegion.appendChild(button);
+                });
+                smallRegion.style.display = 'block';
+            }
+
+            function choiceSmallRegion(region, subRegion) {
+                console.log('Selected:', subRegion);
+                smallRegion.style.display = 'none';
+                //regionChoice.textContent = `${region}-${subRegion}`;
+                regionChoice.firstChild.nodeValue = '';
+                document.getElementById('a').textContent = `${region}`;
+                document.getElementById('b').textContent = `${subRegion}`;
+            }
+
+            function toggleTypeChoice(){  // 유형선택 클릭 시 호출
+                if (type.style.display === 'none' || typee.style.display === '') {
+                    type.style.display = 'block';
+                    bigRegion.style.display = 'none';
+                    smallRegion.style.display = 'none';
+                } else {
+                    type.style.display = 'none';
+                }
+            }
+
+            function choiceType(choicedType){  // 유형(실내/야외)선택 시 호출
+                type.style.display = 'none';
+                typeChoice.textContent = `${choicedType}`;
+            }
+
+      function submitChoice(){
+        var bigRegion = document.getElementById('a').textContent;
+        var smallRegion = document.getElementById('b').textContent;
+        var selectedType = typeChoice.textContent;  // 이름 변경
+
+        if(bigRegion === '') bigRegion = "all";
+        if(smallRegion === '') smallRegion = "all";
+        if(selectedType === '유형선택') selectedType = "all";
+        if(selectedType === '실내') selectedType = 'Y';
+        if(selectedType === '야외') selectedType = 'N';
+
+        var url = `/user/choice?bigRegion=${encodeURIComponent(bigRegion)}&smallRegion=${encodeURIComponent(smallRegion)}&typeChoice=${encodeURIComponent(selectedType)}`;
+        window.location.href = url;
+    }
+        </script>
+    </th:block>
+</html>
