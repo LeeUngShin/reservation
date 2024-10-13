@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class CommonDTO extends Criteria {
 
     // private PaginationInfo paginationInfo;
-    private String delete_yn;
+    private String deleteYn;
     private LocalDateTime insertTime;
     private LocalDateTime updateTime;
     private LocalDateTime deleteTime;

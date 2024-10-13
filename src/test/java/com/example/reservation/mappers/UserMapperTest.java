@@ -80,4 +80,19 @@ class UserMapperTest {
     @Test
     void totalUserCount() {
     }
+
+    @Test
+    void existsUser() {
+        int result = userMapper.existsUser("user01");
+        System.out.println("회원이 존재하는가? " + result);
+    }
+
+//    @Test
+//    void userPassword() {
+//        int result = userMapper.existsUser("user01");
+//        if(result==1){
+//            String pw = userMapper.userPassword("user01");
+//            System.out.println("이 회원의 비밀번호는? " + pw);
+//        }
+//    }
 }

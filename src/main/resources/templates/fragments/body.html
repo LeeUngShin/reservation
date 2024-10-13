@@ -6,12 +6,23 @@
         <div id="logo">
           로고
         </div>
-        <div id="loginButton">
-          <a class="btn btn-outline-secondary" href="user/loginForm" role="button">
+        <div th:if="${session.num == null}">
+          <div id="loginButton">
+            <a class="btn btn-outline-secondary" href="user/loginForm" role="button">
+              <i class="bi bi-person-fill"></i>
+              로그인
+            </a>
+          </div>
+        </div>
+        <div th:if="${session.num != null}">
+          <a class="btn btn-outline-secondary" th:href="@{user/updateForm(num=${session.num})}" role="button">
             <i class="bi bi-person-fill"></i>
-            로그인
+            내정보
           </a>
-
+          <a class="btn btn-outline-secondary" href="user/logout" role="button">
+            <i class="bi bi-person-fill"></i>
+            로그아웃
+          </a>
         </div>
       </header>
       <nav> <!-- -->

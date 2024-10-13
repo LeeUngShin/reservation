@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="board/layout/basic">
-<head th:replace="board/fragments/header :: main-head">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<head th:replace="fragments/head :: main-head">
 <meta charset="UTF-8">
 </head>
 <body>
@@ -8,8 +8,21 @@
 		<input th:each="key, status : ${params.keySet()}" type="hidden" th:name="${key}" th:value="${params.get(key)}"/>
 	</form>
 	
-	<th:block layout:fragment="script">
+	<th:block layout:fragment="add-script">
 		<script th:inline="javascript">
+		/**
+		 * 자료형에 상관없이 값이 비어있는지 확인
+		 *
+		 * @param value - 타겟 밸류
+		 * @returns true or false
+		 */
+			function isEmpty(value) {
+				if (value == null || value == "" || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
+					return true;
+				}
+				return false;
+			}
+
 			window.onload = function(){
 				var message = /*[[${message}]]*/ null;
 				console.log("message : " + message);
@@ -30,7 +43,7 @@
 					location.href = redirectUri;
 				}
 			}
-			
 		</script>
+	</th:block>
 </body>
 </html>

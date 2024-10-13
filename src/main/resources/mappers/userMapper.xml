@@ -28,6 +28,26 @@
             )
     </insert>
 
+    <!--로그인한 아이디 db 존재여부-->
+    <select id="existsUser" parameterType="String" resultType="int">
+        select
+            count(*)
+        from
+            user
+        where
+            id=#{id}
+    </select>
+
+    <!--로그인한 아이디 존재한다면 비밀번호 확인-->
+    <select id="userPassword" parameterType="String" resultType="LoginDTO">
+        select
+            num, pw
+        from
+            user
+        where
+            id=#{id}
+    </select>
+
     <!-- 회원조회-->
     <select id="selectUser" parameterType="long" resultType="UserDTO">
         select
