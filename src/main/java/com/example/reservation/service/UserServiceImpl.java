@@ -16,6 +16,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean registerUser(UserDTO userDTO) {
         int result = userMapper.insertUser(userDTO);
+        Long userNum = userDTO.getNum();
+        System.out.println("이번에 저장한 회원 번호 : " + userNum);
         if(result==1){
             return true;
         }

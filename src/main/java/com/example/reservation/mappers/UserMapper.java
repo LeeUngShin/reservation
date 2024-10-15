@@ -3,6 +3,7 @@ package com.example.reservation.mappers;
 import com.example.reservation.domain.LoginDTO;
 import com.example.reservation.domain.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
 public interface UserMapper {
 
     // 가입
+    @Options(useGeneratedKeys = true, keyProperty = "num")
     public int insertUser(UserDTO userDTO);
 
     // 로그인한 아이디 db 존재여부

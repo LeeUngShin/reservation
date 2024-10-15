@@ -18,7 +18,8 @@
     </sql>
 
     <!--회원가입 -->
-    <insert id="insertUser" parameterType="UserDTO">
+    <insert id="insertUser" parameterType="UserDTO"
+            useGeneratedKeys="true" keyProperty="num">
         insert into
             user(<include refid="userColumns"/>)
         values
@@ -106,6 +107,5 @@
             user
         where
             delete_yn = 'N'
-
     </select>
 </mapper>

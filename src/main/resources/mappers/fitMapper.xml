@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.reservation.mappers.FitMapper">
+
+    <sql id="fitColumns">
+        num,
+        name,
+        post,
+        addr,
+        addrDetail,
+        indoor_outdoor,
+        open_time,
+        close_time,
+        description
+    </sql>
+
+    <!--fit 등록 -->
+    <insert id="insertFit" parameterType="FitDTO"
+            useGeneratedKeys="true" keyProperty="num">
+        insert into
+            gym(
+                <include refid="fitColumns"/>
+            )
+        values
+            (
+            #{num}, #{name}, #{post}, #{addr}, #{addrDetail},
+            #{indoorOutdoor}, #{openTime}, #{closeTime}, #{description}
+        )
+    </insert>
+
+    <!--gym_facility 등록-->
+    <insert id="insertFacility" parameterType="map">
+        insert into
+            gym_facility(gym_num, facility_num)
+        values
+        (
+            #{num}, (select num from facility where type = #{facility})
+        )
+    </insert>
+
+
+    <select id="selectFit" parameterType="long" resultType="FitDTO">
+        select
+            g.num, g.name, g.post, g.addr, g.addrDetail, g.open_time, g.close_time, g.description , g.indoor_outdoor,
+            ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr
+        from
+            gym g
+        left join
+            (select gf.gym_num, f.type
+                from facility f
+                join gym_facility gf
+                on f.num = gf.facility_num) as ff
+        on
+            g.num = ff.gym_num
+        where
+            g.num = #{num}
+        group by
+            g.num;
+
+    </select>
+
+    <update id="updateFit" parameterType="FitDTO">
+        update
+            gym
+        set
+            update_time = now(),
+            name = #{name},
+            post = #{post},
+            addr = #{addr},
+            addrDetail = #{addrDetail},
+            indoor_outdoor = #{indoorOutdoor},
+            description = #{description},
+            open_time = #{openTime},
+            close_time = #{closeTime}
+        where
+            num = #{num}
+    </update>
+
+    <delete id="deleteFacility" parameterType="long">
+        delete from
+            gym_facility gf
+        where
+            gf.gym_num = #{num}
+    </delete>
+
+    <update id="deleteFit" parameterType="long">
+        update
+            gym
+        set
+            delete_time = now(),
+            delete_yn = 'Y'
+        where
+            num = #{num}
+    </update>
+
+    <select id="listFit" resultType="FitDTO">
+        select
+            g.num, g.name, g.post, g.addr, g.addrDetail, g.open_time, g.close_time, g.description , g.indoor_outdoor,
+            ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr
+        from
+            gym g
+        left join
+            (select gf.gym_num, f.type
+                from facility f
+                join gym_facility gf
+                on f.num = gf.facility_num) as ff
+        on
+            g.num = ff.gym_num
+        where
+            g.delete_yn = 'N'
+        group by
+            g.num
+        order by
+            g.num desc
+    </select>
+
+    <select id="cntFit" resultType="int">
+        select
+            count(*)
+        from
+            gym
+        where
+            delete_yn = 'N'
+    </select>
+
+
+</mapper>

@@ -1,14 +1,11 @@
 package com.example.reservation.controller;
 
 import com.example.reservation.constant.Method;
-import com.example.reservation.domain.ChoiceDTO;
 import com.example.reservation.domain.LoginDTO;
 import com.example.reservation.domain.UserDTO;
 import com.example.reservation.service.UserService;
 import com.example.reservation.utils.UiUtils;
 import jakarta.servlet.http.HttpSession;
-import org.apache.catalina.User;
-import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
