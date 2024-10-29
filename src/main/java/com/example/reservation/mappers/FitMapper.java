@@ -16,7 +16,7 @@ public interface FitMapper {
     public int insertFit(FitDTO fitDTO);
 
     // 체육시설에 있는 편의시설 등록
-    public int insertFacility(Map<String, Object> params);
+    public void insertFacility(Map<String, Object> params);
 
     // 체육시설, 편의시설 조회
     public FitDTO selectFit(Long num);
@@ -34,4 +34,5 @@ public interface FitMapper {
 
     public int cntFit();
 
+    public List<FitDTO> searchListFit(Map<String, Object> params);
 }

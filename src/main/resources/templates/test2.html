@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<th:block layout:fragment="title">
+    <title>테스트페이지</title>
+</th:block>
+
+<section>
+    <th:block layout:fragment="content">
+        <div th:each="fitDTO, fitDTOIndex : ${fitDTOList}">
+            <div>
+                <span th:text="${fitDTOIndex}"></span> :
+                <span th:text="${fitDTO}"></span>
+            </div>
+        </div>
+    </th:block>
+</section>
+
+</html>

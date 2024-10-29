@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController extends UiUtils {
 
     @Autowired
@@ -70,7 +70,7 @@ public class UserController extends UiUtils {
 
     @GetMapping("/logout")
     public String logout(HttpSession session, Model model) {
-        String id = (String) session.getAttribute("id");
+        String id = (String) session.getAttribute("num");
         if (id == null || id.isEmpty()) {
             return showMessageWithRedirect("세션에 데이터가 없습니다.", "/user/loginForm", Method.GET, null, model);
         } else {
@@ -85,6 +85,9 @@ public class UserController extends UiUtils {
     public String update(@RequestParam(value="num", required = false) Long num, Model model){
 
         UserDTO userDTO = userService.getUserDetail(num);
+        if(userDTO == null){
+            return showMessageWithRedirect("회원정보가 없습니다.", "/home", Method.GET, null, model);
+        }
         System.out.println("수정할 유저 정보 : " + userDTO);
         model.addAttribute("userDTO", userDTO);
         return "/user/update";
@@ -135,5 +138,4 @@ public class UserController extends UiUtils {
         session.invalidate();
         return showMessageWithRedirect("탈퇴에 성공했습니다..", "/user/loginForm", Method.GET, null, model);
     }
-
 }

@@ -37,6 +37,8 @@
             user
         where
             id=#{id}
+        and
+            delete_yn = 'N'
     </select>
 
     <!--로그인한 아이디 존재한다면 비밀번호 확인-->

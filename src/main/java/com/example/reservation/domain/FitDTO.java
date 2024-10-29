@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class FitDTO {
+public class FitDTO extends CommonDTO{
     private Long num;  // 체육관 번호
     private String name;  // 체육관 이름
     private String post;  // 우편번호

@@ -59,10 +59,8 @@ class FitMapperTest {
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("num", fitNum);
                 map.put("facility", facility);
-                int result2 = fitMapper.insertFacility(map);
-                System.out.println("facility 등록결과 : " + result2);
+                fitMapper.insertFacility(map);
             }
-
         }
     }
 

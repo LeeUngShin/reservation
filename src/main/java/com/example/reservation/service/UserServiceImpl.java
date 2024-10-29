@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO getUserDetail(Long num) {
+        System.out.println("현재 회원 번호 : " + num);
         UserDTO userDTO = userMapper.selectUser(num);
         System.out.println("데이터베이스에서 가져온 유저정보 : "  + userDTO);
         return userDTO;
@@ -67,6 +68,7 @@ public class UserServiceImpl implements UserService{
         System.out.println(userDTO.getDeleteYn());
         System.out.println(userDTO.getDeleteTime());
         System.out.println(userDTO.getInsertTime());
+        System.out.println(userDTO.getUpdateTime());
         System.out.println(userDTO.getUpdateTime());
         if(userDTO !=null && userDTO.getDeleteYn().equals("N")){
             result = userMapper.deleteUser(num);

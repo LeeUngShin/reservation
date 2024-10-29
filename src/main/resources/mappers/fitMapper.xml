@@ -42,7 +42,7 @@
     <select id="selectFit" parameterType="long" resultType="FitDTO">
         select
             g.num, g.name, g.post, g.addr, g.addrDetail, g.open_time, g.close_time, g.description , g.indoor_outdoor,
-            ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr
+            delete_yn, ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr
         from
             gym g
         left join
@@ -121,6 +121,21 @@
             gym
         where
             delete_yn = 'N'
+    </select>
+    <select id="searchListFit" parameterType="map" resultType="com.example.reservation.domain.FitDTO">
+        select
+            *
+        from
+            gym g
+        where
+            g.addr like %#{bigRegion}%
+        and
+            g.addr like %#{smallRegion}%
+        and
+            g.indoor_outdoor = #{typeChoice}
+
+
+
     </select>
 
 
