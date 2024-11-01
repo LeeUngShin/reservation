@@ -122,20 +122,17 @@
         where
             delete_yn = 'N'
     </select>
-    <select id="searchListFit" parameterType="map" resultType="com.example.reservation.domain.FitDTO">
+    <select id="searchListFit" parameterType="map" resultType="FitDTO">
         select
             *
         from
             gym g
         where
-            g.addr like %#{bigRegion}%
+            g.addr like concat('%', #{bigRegion}, '%')
         and
-            g.addr like %#{smallRegion}%
+            g.addr like concat('%', #{smallRegion}, '%')
         and
             g.indoor_outdoor = #{typeChoice}
-
-
-
     </select>
 
 

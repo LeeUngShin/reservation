@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonDTO extends Criteria {
+public class CommonDTO {
 
     // private PaginationInfo paginationInfo;
     private String deleteYn;

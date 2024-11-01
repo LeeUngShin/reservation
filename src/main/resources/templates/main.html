@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
 <th:block layout:fragment="add-css">
-    <link rel="stylesheet" th:href="@{css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </th:block>
 <th:block layout:fragment="title">
     <title>메인페이지</title>
@@ -13,13 +13,13 @@
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img th:src="@{img/carousel01.PNG}" class="d-block w-100" alt="...">
+                        <img th:src="@{/img/carousel01.PNG}" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img th:src="@{img/carousel02.PNG}" class="d-block w-100" alt="...">
+                        <img th:src="@{/img/carousel02.PNG}" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img th:src="@{img/carousel03.PNG}" class="d-block w-100" alt="...">
+                        <img th:src="@{/img/carousel03.PNG}" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

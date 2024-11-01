@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -143,5 +140,18 @@ class FitMapperTest {
                 }
             }
         }
+    }
+
+    @Test
+    void searchListFit() {
+        String bigRegion = "기본";
+        String smallRegion = "주소";
+        String typeChoice = "실내";
+        Map map = new HashMap();
+        map.put("bigRegion", bigRegion);
+        map.put("smallRegion", smallRegion);
+        map.put("typeChoice", typeChoice);
+        List<FitDTO> searchListFit = fitMapper.searchListFit(map);
+        System.out.println(searchListFit);
     }
 }

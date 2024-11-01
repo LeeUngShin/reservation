@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.reservation.mappers.ReservationMapper">
+    <sql id="reservationColumns">
+        num,
+        user_num,
+        gym_num,
+        reservation_date,
+        reservation_start_time,
+        reservation_end_time,
+        person_cnt,
+        insert_time,
+        update_time
+    </sql>
+    <insert id="insertReservation" parameterType="ReservationDTO">
+        insert into
+            reservation(
+                <include refid="reservationColumns"/>
+            )
+        values
+            (
+            #{num}, #{userNum}, #{gymNum},
+            #{reservationDate}, #{reservationStartTime},
+            #{reservationEndTime}, #{personCnt}, now(), null
+            )
+    </insert>
+</mapper>

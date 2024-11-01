@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
 <th:block layout:fragment="add-css">
-    <link rel="stylesheet" th:href="@{css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </th:block>
 <th:block layout:fragment="title">
     <title>핏인포</title>
 </th:block>
+
 <section>
-    <th:block layout:fragment="add-css">
-        <!--<link rel="stylesheet" th:href="@{css/fit.css}"/>-->
+    <th:block layout:fragment="content">
+        <div th:text="${fitDTO}"></div>
+        <div th:text="${fitDTO.description}"></div>
     </th:block>
-    <th:block layout:fragment="title">
-        <title>fitInfo</title>
-    </th:block>
-    <section>
-        <th:block layout:fragment="content">
-            <div th:text="${fitDTO}"></div>
-            <div th:text="${fitDTO.description}"></div>
-        </th:block>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary">Left</button>
-            <button type="button" class="btn btn-primary">Middle</button>
-            <button type="button" class="btn btn-primary">Right</button>
-        </div>
-    </section>
-    <th:block  layout:fragment="add-script">
-        <script th:inline="javascript">
-        </script>
-    </th:block>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary">Left</button>
+        <button type="button" class="btn btn-primary">Middle</button>
+        <button type="button" class="btn btn-primary">Right</button>
+    </div>
 </section>
+<th:block  layout:fragment="add-script">
+    <script th:inline="javascript">
+    </script>
+</th:block>
+
 </html>

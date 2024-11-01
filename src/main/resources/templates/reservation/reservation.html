@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{/css/reservation/reservation.css}"/>
+</th:block>
+<th:block layout:fragment="title">
+    <title>핏예약화면</title>
+</th:block>
+<section>
+    <th:block layout:fragment="content">
+        <div th:text="${fitDTO}"></div>
+        <div id="dateTime">
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button id="prevMonth">&lt;</button>
+                    <h2 id="currentMonth">May 2023</h2>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+                <div class="calendar-body">
+                    <div class="calendar-grid" id="calendarGrid">
+                        <div class="calendar-weekday">Sun</div>
+                        <div class="calendar-weekday">Mon</div>
+                        <div class="calendar-weekday">Tue</div>
+                        <div class="calendar-weekday">Wed</div>
+                        <div class="calendar-weekday">Thu</div>
+                        <div class="calendar-weekday">Fri</div>
+                        <div class="calendar-weekday">Sat</div>
+                    </div>
+                </div>
+                <button type="button" id="testButton">클릭</button>
+            </div>
+            <div>
+                <div class="time-container" id="timeContainer">
+
+                </div>
+                <div id="timeTestButton">시간확인</div>
+            </div>
+            <button id="submit" type="button">날짜시간제출</button>
+
+            <form action="/reservation/reservationSubmit" method="post" id="reservationForm">
+                <input type="hidden" name="gymNum" th:value="${fitDTO.num}" id="gymNum">
+                <input type="hidden" name="userNum" value="5" id="userNum">
+                <input type="hidden" name="reservationDate" id="reservationDate">
+                <input type="hidden" name="reservationStartTime" id="reservationStartTime">
+                <div class="mb-3">
+                    <label for="personCnt" class="form-label">인원</label>
+                    <input type="text" class="form-control" name="personCnt" id="personCnt">
+                </div>
+                <button id="transform" type="button">제출</button>
+            </form>
+        </div>
+        <!--<div class="mb-3">
+            <label for="personCnt" class="form-label">인원수</label>
+            <input type="text" class="form-control" th:field="*{personCnt}" id="personCnt">
+        </div>-->
+    </th:block>
+</section>
+<th:block  layout:fragment="add-script">
+    <script th:inline="javascript">
+        var message = /*[[${data}]]*/ [];
+        var gymNum = /*[[${fitDTO.num}]]*/ [];
+    </script>
+    <script th:src="@{/js/reservation/reservation.js}" th:inline="javascript"></script>
+</th:block>
+</html>
