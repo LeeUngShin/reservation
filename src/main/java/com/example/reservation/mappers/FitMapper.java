@@ -1,6 +1,7 @@
 package com.example.reservation.mappers;
 
 import com.example.reservation.domain.FitDTO;
+import com.example.reservation.domain.FitFileDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 
@@ -18,8 +19,18 @@ public interface FitMapper {
     // 체육시설에 있는 편의시설 등록
     public void insertFacility(Map<String, Object> params);
 
+    // 체육시설 등록시 첨부파일 등록
+    @Options(useGeneratedKeys = true, keyProperty = "num")
+    public int insertFitMainFile(FitFileDTO fitFileDTO);
+
+    public int insertFitSubFile(FitFileDTO fitFileDTO);
+
     // 체육시설, 편의시설 조회
     public FitDTO selectFit(Long num);
+
+    // 체육시설 등록시 첨부한 파일 조회
+    public FitFileDTO selectFitMainFile(Long mainFileNum);
+    public List<FitFileDTO> selectFitSubFile(Long gymNum);
 
     // 체육시설 수정
     public int updateFit(FitDTO fitDTO);

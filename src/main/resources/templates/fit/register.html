@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{css/common.css}">
 </head>
 <body>
-    <form th:action="@{/fit/register}" th:object="${fitDTO}" method="post">
+    <form th:action="@{/fit/register}" th:object="${fitDTO}" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="name" class="form-label">이름</label>
             <input type="text" class="form-control" th:field="*{name}" id="name">
@@ -71,6 +71,14 @@
         <div class="mb-3">
             <label for="description" class="form-label">설명</label>
             <textarea class="form-control" th:field="*{description}" id="description" placeholder="설명을 작성해주세요"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">메인이미지</label>
+            <input class="form-control" type="file" id="formFileMultiple" name="fitMainFile" multiple required>
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple2" class="form-label">서브이미지</label>
+            <input class="form-control" type="file" id="formFileMultiple2" name="fitSubFile" multiple required>
         </div>
         <button type="submit" class="btn btn-outline-secondary">등록하기</button>
     </form>

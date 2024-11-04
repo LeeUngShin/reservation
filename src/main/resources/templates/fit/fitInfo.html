@@ -11,7 +11,18 @@
     <th:block layout:fragment="content">
         <div th:text="${fitDTO}"></div>
         <div th:text="${fitDTO.description}"></div>
+        <div th:if = "${fitDTO.fileAttached==1}">
+            <div>
+                <img th:src="@{|/upload/${fitMainFileDTO.storedFileName}|}" alt="" width="200" height="200">
+            </div>
+            <hr>
+            <div th:each="fitFileDTO : ${fitSubFileDTOList}">
+                <img th:src="@{|/upload/${fitFileDTO.storedFileName}|}" alt="" width="200" height="200">
+            </div>
+
+        </div>
     </th:block>
+
     <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-primary">Left</button>
         <button type="button" class="btn btn-primary">Middle</button>

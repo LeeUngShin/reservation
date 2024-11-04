@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -32,5 +34,14 @@ class ReservationMapperTest {
             System.out.println("성공");
         }
         
+    }
+
+    @Test
+    void reservationInfo() {
+
+        List<Time> timeList = reservationMapper.reservationTimeInfo(10L);
+        System.out.println("---------------------");
+        System.out.println(timeList);
+        System.out.println("---------------------");
     }
 }

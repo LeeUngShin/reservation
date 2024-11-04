@@ -21,7 +21,14 @@
             (
             #{num}, #{userNum}, #{gymNum},
             #{reservationDate}, #{reservationStartTime},
-            #{reservationEndTime}, #{personCnt}, now(), null
+            SEC_TO_TIME(TIME_TO_SEC(#{reservationStartTime}) + 3600), #{personCnt}, now(), null
             )
     </insert>
+
+    <select id="reservationTimeInfo" resultType="java.sql.Time" parameterType="long">
+        select reservation.reservation_start_time
+        from gym
+        inner join reservation
+        on gym.num = reservation.gym_num;
+    </select>
 </mapper>

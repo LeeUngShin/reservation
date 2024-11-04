@@ -92,33 +92,33 @@ document.addEventListener('DOMContentLoaded', function() {
     function createTimeButtons() {
 
         const container = document.getElementById('timeContainer');
-        const startTime = "9" + ":" + "00";
-        const endTime = "22" + ":" + "00";
-        //console.log(startTime);
-        //console.log(endTime);
-        //console.log(startTime.split(":")[0]);
-        //console.log(endTime.split(":")[0]);
 
+        const startTime = fitDTO.openTime;
+        const endTime = fitDTO.closeTime;
 
-        for(let hour = parseInt(startTime.split(":")[0], 10); hour<=parseInt(endTime.split(":")[0], 10); hour++){
+        for(let hour = parseInt(startTime.split(":")[0], 10); hour<parseInt(endTime.split(":")[0], 10); hour++){
             const timeDiv = document.createElement('div');
             timeDiv.className = 'time-btn';
-            timeDiv.textContent = `${hour}:00`;
+            timeDiv.textContent = `${String(hour).padStart(2, "0")}:00`;
 
-            timeDiv.addEventListener('click', function() {
+            if(reservedTimes.includes(timeDiv.textContent+":00")){
+                timeDiv.classList.add('disabled');
+            }
+            else{
+                timeDiv.addEventListener('click', function() {
                 // 기존에 선택된 버튼의 선택 상태를 해제
                 document.querySelectorAll('.time-btn.selected')
                     .forEach(btn => btn.classList.remove('selected'));
 
                 // 현재 버튼을 선택 상태로 변경
                 this.classList.add('selected');
-            });
+                });
+            }
 
             container.appendChild(timeDiv);
             console.log(document.querySelector('.time-btn').textContent);
         }
     }
-
 
     createTimeButtons();
 
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let submitTime = document.getElementById("reservationStartTime");
 
-        console.log(`${time}`.split(":")[0].padStart(2,"0")); // 시 출력
+        console.log((`${time}`.split(":")[0].padStart(2,"0"))); // 시 출력
         console.log(`${time}`.split(":")[1].padStart(2,"0")); // 분 출력
         submitTime.value = `${time.split(":")[0].padStart(2, "0")}:${time.split(":")[1].padStart(2, "0")}`;
         console.log(submitTime.value);

@@ -9,6 +9,7 @@
 <section>
     <th:block layout:fragment="content">
         <div th:text="${fitDTO}"></div>
+        <div th:text="${timeList}"></div>
         <div id="dateTime">
             <div class="calendar">
                 <div class="calendar-header">
@@ -39,12 +40,13 @@
 
             <form action="/reservation/reservationSubmit" method="post" id="reservationForm">
                 <input type="hidden" name="gymNum" th:value="${fitDTO.num}" id="gymNum">
-                <input type="hidden" name="userNum" value="5" id="userNum">
+                <input type="hidden" name="userNum" value="9" id="userNum">
                 <input type="hidden" name="reservationDate" id="reservationDate">
                 <input type="hidden" name="reservationStartTime" id="reservationStartTime">
+                <input type="hidden" name="reservationEndTime" id="reservationEndTime">
                 <div class="mb-3">
                     <label for="personCnt" class="form-label">인원</label>
-                    <input type="text" class="form-control" name="personCnt" id="personCnt">
+                    <input type="text" class="form-control" name="personCnt" id="personCnt" value="1">
                 </div>
                 <button id="transform" type="button">제출</button>
             </form>
@@ -59,6 +61,9 @@
     <script th:inline="javascript">
         var message = /*[[${data}]]*/ [];
         var gymNum = /*[[${fitDTO.num}]]*/ [];
+        const reservedTimes = /*[[${timeList}]]*/ [];
+        const fitDTO = /*[[${fitDTO}]]*/ {};
+        //console.log("fitDTO : ", fitDTO);
     </script>
     <script th:src="@{/js/reservation/reservation.js}" th:inline="javascript"></script>
 </th:block>

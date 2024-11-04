@@ -1,94 +1,98 @@
-        #dateTime{
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-        }
-        .calendar {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            min-width: 400px;
-        }
-        .calendar-header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .calendar-header button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        .calendar-body {
-            padding: 10px;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-        }
-        .calendar-day {
-            text-align: center;
-            padding: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .calendar-day.disabled{
-            color : grey;
-            cursor: default;
-        }
-        .calendar-day:hover {
-            background-color: #e0e0e0;
-        }
-        .calendar-day.selected {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .calendar-weekday {
-            text-align: center;
-            font-weight: bold;
-            padding: 5px;
-            color: #777;
-        }
+#dateTime{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+.calendar {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    min-width: 400px;
+}
+.calendar-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.calendar-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+.calendar-body {
+    padding: 10px;
+}
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+.calendar-day {
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.calendar-day.disabled{
+    color : grey;
+    cursor: default;
+}
+.time-btn.disabled{
+  color : grey;
+  cursor: default;
+}
+.calendar-day:hover {
+    background-color: #e0e0e0;
+}
+.calendar-day.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+.calendar-weekday {
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    color: #777;
+}
 
-        .time-grid{
-            border : solid black 2px;
+.time-grid{
+    border : solid black 2px;
 
-        }
+}
 
-        .time-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-        }
+.time-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+}
 
-        .time-btn {
-            padding: 15px 25px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
-        }
+.time-btn {
+    padding: 15px 25px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
 
-        .time-btn:hover {
-            background-color: #f0f0f0;
-        }
+.time-btn:hover {
+    background-color: #f0f0f0;
+}
 
-        .time-btn.selected {
-            background-color: #007bff;
-            color: white;
-            border-color: #0056b3;
-        }
+.time-btn.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}

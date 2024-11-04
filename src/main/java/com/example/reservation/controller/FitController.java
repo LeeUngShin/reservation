@@ -3,6 +3,7 @@ package com.example.reservation.controller;
 import com.example.reservation.constant.Method;
 import com.example.reservation.domain.CommonDTO;
 import com.example.reservation.domain.FitDTO;
+import com.example.reservation.domain.FitFileDTO;
 import com.example.reservation.service.FitService;
 import com.example.reservation.utils.UiUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class FitController extends UiUtils {
             e.printStackTrace();
             return showMessageWithRedirect("데이터 처리 과정에 문제가 발생했습니다.", "/fit/registerForm", Method.GET, null, model);
         }catch (Exception e){
+            e.printStackTrace();
             return showMessageWithRedirect("시스템에 문제가 발생했습니다.", "/fit/registerForm", Method.GET, null, model);
         }
         return showMessageWithRedirect("등록에 성공했습니다.", "/home", Method.GET, null, model);
@@ -100,6 +102,16 @@ public class FitController extends UiUtils {
             else {
                 System.out.println("가져온 fit 정보 : " + fitDTO);
                 model.addAttribute("fitDTO", fitDTO);
+                if(fitDTO.getFileAttached()==1){
+
+                    FitFileDTO fitMainFileDTO = fitService.fitMainFileInfo(fitDTO.getNum());
+                    System.out.println("가져온 fit메인파일리스트정보 : " + fitMainFileDTO);
+                    model.addAttribute("fitMainFileDTO", fitMainFileDTO);
+
+                    List<FitFileDTO> fitSubFileDTOList = fitService.fitSubFileInfo(fitMainFileDTO.getNum());
+                    System.out.println("가져온 fit서브파일리스트정보 : " + fitSubFileDTOList);
+                    model.addAttribute("fitSubFileDTOList", fitSubFileDTOList);
+                }
                 return "fit/fitInfo";
             }
         }

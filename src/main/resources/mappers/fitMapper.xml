@@ -11,7 +11,8 @@
         indoor_outdoor,
         open_time,
         close_time,
-        description
+        description,
+        fileAttached
     </sql>
 
     <!--fit 등록 -->
@@ -24,7 +25,8 @@
         values
             (
             #{num}, #{name}, #{post}, #{addr}, #{addrDetail},
-            #{indoorOutdoor}, #{openTime}, #{closeTime}, #{description}
+            #{indoorOutdoor}, #{openTime}, #{closeTime},
+            #{description}, #{fileAttached}
         )
     </insert>
 
@@ -38,11 +40,29 @@
         )
     </insert>
 
+    <!--fit_MainFile 등록-->
+    <insert id="insertFitMainFile" parameterType="FitFileDTO"  useGeneratedKeys="true" keyProperty="num">
+        insert into fit_mainFile
+        values(
+            #{num}, #{fitNum}, #{originalFileName},
+            #{storedFileName}
+        )
+    </insert>
+
+    <!--fit_SubFile 등록-->
+    <insert id="insertFitSubFile" parameterType="FitFileDTO">
+        insert into fit_subFile
+        values(
+            #{num}, #{mainFileNum}, #{originalFileName},
+            #{storedFileName}
+        )
+    </insert>
+
 
     <select id="selectFit" parameterType="long" resultType="FitDTO">
         select
             g.num, g.name, g.post, g.addr, g.addrDetail, g.open_time, g.close_time, g.description , g.indoor_outdoor,
-            delete_yn, ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr
+            delete_yn, ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr, fileAttached
         from
             gym g
         left join
@@ -57,6 +77,18 @@
         group by
             g.num;
 
+    </select>
+
+    <select id="selectFitMainFile" resultType="com.example.reservation.domain.FitFileDTO" parameterType="Long">
+        select *
+        from fit_mainFile
+        where fit_num = #{mainFileNum}
+    </select>
+
+    <select id="selectFitSubFile" resultType="com.example.reservation.domain.FitFileDTO" parameterType="Long">
+        select *
+        from fit_SubFile
+        where mainFile_num = #{gymNum}
     </select>
 
     <update id="updateFit" parameterType="FitDTO">
