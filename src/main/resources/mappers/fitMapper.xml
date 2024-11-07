@@ -12,7 +12,9 @@
         open_time,
         close_time,
         description,
-        fileAttached
+        fileAttached,
+        latitude,
+        longitude
     </sql>
 
     <!--fit 등록 -->
@@ -26,7 +28,8 @@
             (
             #{num}, #{name}, #{post}, #{addr}, #{addrDetail},
             #{indoorOutdoor}, #{openTime}, #{closeTime},
-            #{description}, #{fileAttached}
+            #{description}, #{fileAttached}, #{longitude},
+            #{longitude}
         )
     </insert>
 
@@ -59,7 +62,7 @@
     </insert>
 
 
-    <select id="selectFit" parameterType="long" resultType="FitDTO">
+    <select id="selectFit" parameterType="Long" resultType="FitDTO">
         select
             g.num, g.name, g.post, g.addr, g.addrDetail, g.open_time, g.close_time, g.description , g.indoor_outdoor,
             delete_yn, ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr, fileAttached
@@ -76,7 +79,6 @@
             g.num = #{num}
         group by
             g.num;
-
     </select>
 
     <select id="selectFitMainFile" resultType="com.example.reservation.domain.FitFileDTO" parameterType="Long">
@@ -125,10 +127,11 @@
             num = #{num}
     </update>
 
-    <select id="listFit" resultType="FitDTO">
+    <select id="listFit" resultType="FitDTO" parameterType="FitDTO">
         select
             g.num, g.name, g.post, g.addr, g.addrDetail, g.open_time, g.close_time, g.description , g.indoor_outdoor,
-            ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr
+            ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr,
+            latitude, longitude, fileAttached
         from
             gym g
         left join
@@ -140,32 +143,51 @@
             g.num = ff.gym_num
         where
             g.delete_yn = 'N'
+        <if test="bigRegion == null or bigRegion == ''
+            and smallRegion == null or smallRegion == ''
+            and choiceType != null and choiceType != ''">
+            AND g.indoor_outdoor = #{choiceType}
+        </if>
+        <if test="bigRegion != null and bigRegion != ''
+            and smallRegion != null and smallRegion != ''
+            and choiceType != null and choiceType != ''">
+            AND (
+            g.addr like concat('%', #{bigRegion}, '%')
+            and g.addr like concat('%', #{smallRegion}, '%')
+            and g.indoor_outdoor = #{choiceType}
+            )
+        </if>
+
         group by
             g.num
         order by
             g.num desc
+        limit
+            #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
 
-    <select id="cntFit" resultType="int">
+    <select id="cntFit" resultType="int" parameterType="FitDTO">
         select
             count(*)
         from
             gym
         where
             delete_yn = 'N'
+        <if test="bigRegion == null or bigRegion == ''
+            and smallRegion == null or smallRegion == ''
+            and choiceType != null and choiceType != ''">
+            AND indoor_outdoor = #{choiceType}
+        </if>
+        <if test="bigRegion != null and bigRegion != ''
+            and smallRegion != null and smallRegion != ''
+            and choiceType != null and choiceType != ''">
+            AND (
+            addr like concat('%', #{bigRegion}, '%')
+            and addr like concat('%', #{smallRegion}, '%')
+            and indoor_outdoor = #{choiceType}
+            )
+        </if>
     </select>
-    <select id="searchListFit" parameterType="map" resultType="FitDTO">
-        select
-            *
-        from
-            gym g
-        where
-            g.addr like concat('%', #{bigRegion}, '%')
-        and
-            g.addr like concat('%', #{smallRegion}, '%')
-        and
-            g.indoor_outdoor = #{typeChoice}
-    </select>
-
-
 </mapper>
+
+

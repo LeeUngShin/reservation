@@ -41,9 +41,10 @@ public interface FitMapper {
     public int deleteFit(Long num);
 
     // 체육시설 리스트
-    public List<FitDTO> listFit();
+    public List<FitDTO> listFit(FitDTO fitDTO);
 
-    public int cntFit();
+    public int cntFit(FitDTO fitDTO);
 
-    public List<FitDTO> searchListFit(Map<String, Object> params);
+    // 체육시설 검색
+    // public List<FitDTO> searchListFit(Map<String, Object> params);
 }

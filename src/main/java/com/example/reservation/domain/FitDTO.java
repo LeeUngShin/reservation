@@ -28,8 +28,12 @@ public class FitDTO extends CommonDTO{
     private String description;  // 설명
     private String facilityTypesStr;  // 편의시설 ','로 구분
     private List<String> facilityTypes;  // 체크박스로 받을 편의시설 목록
+    private String latitude;
+    private String longitude;
     
     private int fileAttached;  // 이미지 첨부 여부
     private MultipartFile fitMainFile; // 메인이미지 파일
     private List<MultipartFile> fitSubFile;  // 서브이미지 파일
+    private String mainFilePath;
+    private List<String> subFilePath;
 }

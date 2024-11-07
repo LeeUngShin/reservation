@@ -3,6 +3,7 @@ package com.example.reservation.service;
 import com.example.reservation.domain.FitDTO;
 import com.example.reservation.domain.FitFileDTO;
 import com.example.reservation.mappers.FitMapper;
+import com.example.reservation.paging.PaginationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -125,13 +126,33 @@ public class FitServiceImpl implements FitService{
         return false;
     }
 
-    @Override
+    /*@Override  // 전체 리스트 (페이징처리X)
     public List<FitDTO> listFit() {
 
         List<FitDTO> list = fitMapper.listFit();
         System.out.println(list);
 
         return list;
+    }*/
+
+    @Override  // 전체 리스트 (페이징처리X)
+    public List<FitDTO> listFit(FitDTO fitDTO) {
+
+        List<FitDTO> fitDTOList = new ArrayList<>();
+        int fitTotalCnt = fitMapper.cntFit(fitDTO);
+        System.out.println("choiceType : " + fitDTO.getChoiceType());
+        System.out.println("count : " + fitTotalCnt);
+
+        PaginationInfo paginationInfo = new PaginationInfo(fitDTO);
+        paginationInfo.setTotalRecordCount(fitTotalCnt);
+
+        fitDTO.setPaginationInfo(paginationInfo);
+
+        if(fitTotalCnt > 0){
+            fitDTOList = fitMapper.listFit(fitDTO);
+        }
+
+        return fitDTOList;
     }
 
 
@@ -155,6 +176,11 @@ public class FitServiceImpl implements FitService{
         return fitFileDTO;
     }
 
+    @Override
+    public List<FitDTO> searchListFit(String bigRegion, String smallRegion, String typeChoice) {
+        return null;
+    }
+
 
     @Override
     public List<FitFileDTO> fitSubFileInfo(Long mainFileNum) {
@@ -162,10 +188,12 @@ public class FitServiceImpl implements FitService{
         return fitFileDTOList;
     }
 
-    @Override
-    public List<FitDTO> searchListFit(String bigRegion, String smallRegion, String typeChoice) {
-        List<FitDTO> list = fitMapper.listFit();
-        System.out.println(list);
-        return list;
-    }
+//    @Override
+//    public List<FitDTO> searchListFit(String bigRegion, String smallRegion, String typeChoice) {
+//       if(bigRegion.equals("all") && smallRegion.equals("all") && typeChoice.equals("all")){
+//           List<FitDTO> fitDTOList = fitMapper.listFit();
+//           return fitDTOList;
+//       }
+//
+//    }
 }

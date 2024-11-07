@@ -1,5 +1,6 @@
 package com.example.reservation.service;
 
+import com.example.reservation.constant.ROLE;
 import com.example.reservation.domain.LoginDTO;
 import com.example.reservation.domain.UserDTO;
 import com.example.reservation.mappers.UserMapper;
@@ -15,6 +16,7 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
     @Override
     public boolean registerUser(UserDTO userDTO) {
+        userDTO.setRole(ROLE.USER.toString());
         int result = userMapper.insertUser(userDTO);
         Long userNum = userDTO.getNum();
         System.out.println("이번에 저장한 회원 번호 : " + userNum);
@@ -30,9 +32,10 @@ public class UserServiceImpl implements UserService{
         int result = userMapper.existsUser(loginDTO.getId());
         if (result == 1) {
             LoginDTO loginDTO1 = userMapper.userPassword(loginDTO.getId());
-            System.out.println("db에서 가져온 데이터 : " + loginDTO1);
+            System.out.println("로그인 시 db에서 가져온 데이터 : " + loginDTO1);
             if (loginDTO1.getPw().equals(loginDTO.getPw())) {
                 session.setAttribute("num", loginDTO1.getNum());
+                session.setAttribute("role", loginDTO1.getRole());
                 return true;
             }
             return false;

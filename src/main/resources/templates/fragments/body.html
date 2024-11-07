@@ -6,7 +6,7 @@
         <div id="logo">
           로고
         </div>
-        <div th:if="${session.num == null}">
+        <div th:if="${session.num == null}"> <!--비로그인-->
           <div id="loginButton">
             <a class="btn btn-outline-secondary" href="user/loginForm" role="button">
               <i class="bi bi-person-fill"></i>
@@ -14,7 +14,7 @@
             </a>
           </div>
         </div>
-        <div th:if="${session.num != null}">
+        <div th:if="${session.num != null and session.role == 'USER'}">
           <a class="btn btn-outline-secondary" th:href="@{user/updateForm(num=${session.num})}" role="button">
             <i class="bi bi-person-fill"></i>
             내정보
@@ -24,19 +24,32 @@
             로그아웃
           </a>
         </div>
+        <div th:if="${session.num != null and session.role == 'ADMIN'}">
+          <a class="btn btn-outline-secondary" th:href="@{user/updateForm(num=${session.num})}" role="button">
+            <i class="bi bi-person-fill"></i>
+            내정보
+          </a>
+          <a class="btn btn-outline-secondary" href="user/logout" role="button">
+            <i class="bi bi-person-fill"></i>
+            로그아웃
+          </a>
+          <a class="btn btn-outline-secondary" th:href="@{fit/registerForm}" role="button">
+            등록하기
+          </a>
+        </div>
       </header>
       <nav> <!-- -->
         메뉴바 부분입니다.
       </nav>
-      <section>
+      <section id="section">
         <th:block layout:fragment="content"></th:block>
         <th:block layout:fragment="add-content1"></th:block>
         <th:block layout:fragment="paging"></th:block>
         <th:block layout:fragment="add-content2"></th:block>
       </section>
-      <foot>
+      <footer>
         푸터부분입니다.
-      </foot>
+      </footer>
     </div>
     <script th:src="@{/js/common.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>

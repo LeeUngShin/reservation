@@ -57,3 +57,27 @@
     background-color: #e0e0e0;
     z-index: 10;
 }
+
+#mainCenter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top : 80px;
+    padding-bottom : 80px;
+}
+
+.row{
+    margin : 20px;
+}
+
+ul{
+    list-style : none;
+    padding-left: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    min-height : 180px;
+}

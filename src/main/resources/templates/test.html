@@ -6,13 +6,47 @@
 
 <section>
     <th:block layout:fragment="content">
-        <div th:each="fitDTO, fitDTOIndex : ${fitDTOList}">
+        <div th:if="${not #lists.isEmpty(fitDTOList)}">
+            <div th:each="fitDTO, fitDTOIndex : ${fitDTOList}">
+                <div>
+                    <span th:text="${fitDTOIndex}"></span> :
+                    <span th:text="${fitDTO}"></span>
+                </div>
+            </div>
+        </div>
+        <div th:unless="${not #lists.isEmpty(fitDTOList)}">
             <div>
-                <span th:text="${fitDTOIndex}"></span> :
-                <span th:text="${fitDTO}"></span>
+                <span>조회된 결과가 없습니다.</span>
             </div>
         </div>
     </th:block>
+    <th:block layout:fragment="paging">
+        <nav th:if="${fitDTO != null and fitDTO.paginationInfo.totalRecordCount > 0}" th:object="${fitDTO.paginationInfo}" th:with="info=${fitDTO.paginationInfo}" aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${requestURI} ]], [[ ${fitDTO.makeChoiceQueryString(1)} ]])">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                </li>
+                <li class="page-item" th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${requestURI} ]], [[ ${fitDTO.makeChoiceQueryString(info.firstPage - 1)} ]])">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></a>
+                </li>
+                <li class="page-item" th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:class="${pageNo ==fitDTO.currentPageNo} ? 'active'">
+                    <a class="page-link" href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${requestURI} ]], [[ ${fitDTO.makeChoiceQueryString(pageNo)} ]])"></a>
+                </li>
+                <li class="page-item" th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${requestURI} ]], [[ ${fitDTO.makeChoiceQueryString(info.lastPage +1)} ]])">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></a>
+                </li>
+                <li class="page-item" th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${requestURI} ]], [[ ${fitDTO.makeChoiceQueryString(info.totalPageCount)} ]])">
+                    <a class="page-link" href="javascript:void(0)" aria-label="next"><span aria-hidden="true">&raquo;</span></a>
+                </li>
+            </ul>
+        </nav>
+    </th:block>
 </section>
-
+<th:block layout:fragment="add-script">
+    <script th:inline="javascript">
+        function movePage(uri, queryString){
+            location.href=uri + queryString;
+        }
+    </script>
+</th:block>
 </html>

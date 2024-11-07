@@ -26,4 +26,5 @@ public class ReservationDTO extends CommonDTO{
     private LocalTime reservationEndTime;
 
     private int personCnt;
+
 }

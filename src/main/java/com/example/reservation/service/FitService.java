@@ -14,7 +14,7 @@ public interface FitService {
 
     public boolean deleteFit(Long num);
 
-    public List<FitDTO> listFit();
+    public List<FitDTO> listFit(FitDTO fitDTO);
 
     public FitDTO fitInfo(Long num);
 

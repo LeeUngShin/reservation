@@ -1,5 +1,6 @@
 package com.example.reservation.domain;
 
+import com.example.reservation.constant.ROLE;
 import lombok.*;
 
 @Setter
@@ -17,4 +18,5 @@ public class UserDTO extends CommonDTO{
     private String post;
     private String addr;
     private String addrDetail;
+    private String role;
 }

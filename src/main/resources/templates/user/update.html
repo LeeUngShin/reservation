@@ -117,7 +117,7 @@
         <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
     </div>
     <button type="submit">수정하기</button>
-    <a th:href="@{/user/delete(num=*{num})}" th:onclick="return deleteUser([[${userDTO.num}]])">탈퇴하기</a>
+    <button th:onclick="return deleteUser([[${userDTO.num}]])" type="button">탈퇴하기</button>
 </form>
 
 
@@ -126,7 +126,10 @@
     <script th:inline="javascript">
         function deleteUser(num){
             var deleteCheck = confirm("정말로 삭제하시겠습니까?");
-            return deleteCheck;
+            if(deleteCheck == false){
+                return false;
+            }
+            window.location.href=`/user/delete?num=${num}`;
         }
     </script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

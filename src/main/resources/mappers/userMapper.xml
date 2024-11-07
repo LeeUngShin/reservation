@@ -14,7 +14,8 @@
         delete_yn,
         insert_time,
         update_time,
-        delete_time
+        delete_time,
+        role
     </sql>
 
     <!--회원가입 -->
@@ -25,7 +26,7 @@
         values
             (
             #{num}, #{id}, #{pw}, #{name}, #{email}, #{post}, #{addr},
-            #{addrDetail}, 'N', NOW(), NULL, NULL
+            #{addrDetail}, 'N', NOW(), NULL, NULL, #{role}
             )
     </insert>
 
@@ -44,7 +45,7 @@
     <!--로그인한 아이디 존재한다면 비밀번호 확인-->
     <select id="userPassword" parameterType="String" resultType="LoginDTO">
         select
-            num, pw
+            num, pw, role
         from
             user
         where

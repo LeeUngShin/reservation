@@ -6,6 +6,7 @@ import com.example.reservation.domain.FitDTO;
 import com.example.reservation.domain.FitFileDTO;
 import com.example.reservation.service.FitService;
 import com.example.reservation.utils.UiUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -78,12 +79,20 @@ public class FitController extends UiUtils {
     }
 
     @GetMapping("/fitList")
-    public String fitList(Model model){
+    public String fitList(@ModelAttribute("fitDTO") FitDTO fitDTO,
+                          HttpServletRequest request, Model model){
 
-        List<FitDTO> fitDTOList = fitService.listFit();
+        List<FitDTO> fitDTOList = fitService.listFit(fitDTO);
+        System.out.println("컨트롤러 왔을 때 페이징 : " + fitDTO.getPaginationInfo());
+        System.out.println("컨트롤러 왔을 때 현재페이지 : " + fitDTO.getCurrentPageNo());
+        System.out.println("컨트롤러 왔을 때 페이지 당 데이터 개수 : " + fitDTO.getRecordsPerPage());
+        System.out.println("컨트롤러 왔을 때 하단 선택숫자 개수 : " + fitDTO.getPageSize());
+        System.out.println("컨트롤러 왔을 때 전체 데이터 수 : " + fitDTO.getPaginationInfo().getTotalRecordCount());
 
         model.addAttribute("fitDTOList", fitDTOList);
-
+        model.addAttribute("requestURI", request.getRequestURI());
+        System.out.println("핏디티오리스트 : " +  fitDTOList);
+        System.out.println("리퀘스트URI : " + request.getRequestURI());
         return "test";
     }
 
@@ -125,6 +134,7 @@ public class FitController extends UiUtils {
                             Model model){
 
         System.out.println("bigRegion : " + bigRegion + ", smallRegion : " + smallRegion + ", typeChoice : " + typeChoice);
+
         return "test2";
     }
 }

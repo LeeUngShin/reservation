@@ -3,85 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-    <form th:action="@{/fit/register}" th:object="${fitDTO}" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="name" class="form-label">이름</label>
-            <input type="text" class="form-control" th:field="*{name}" id="name">
-        </div>
-        <div class="mb-3">
-            <label for="openTime" class="form-label">여는시각</label>
-            <input type="time" class="form-control" th:field="*{openTime}" id="openTime">
-        </div>
-        <div class="mb-3">
-            <label for="closeTime" class="form-label">닫는시각</label>
-            <input type="time" class="form-control" th:field="*{closeTime}" id="closeTime">
-        </div>
-        <div class="mb-3">
-            <p><input style="width : 200px;" type="text" id="sample6_postcode" th:field="*{post}" placeholder="우편번호">
-                <input type="button" class="btn btn-outline-secondary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></p>
-            <p><input type="text" id="sample6_address" th:field="*{addr}" placeholder="주소"></p>
-            <p><input type="text" id="sample6_detailAddress" th:field="*{addrDetail}" placeholder="상세주소"></p>
-            <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" th:field="*{indoorOutdoor}" id="in" value="실내" checked>
-            <label class="form-check-label" for="in">
-                실내
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" th:field="*{indoorOutdoor}" id="out" value="실외">
-            <label class="form-check-label" for="out">
-                실외
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="주차장" id="facility01" checked>
-            <label class="form-check-label" for="facility01">
-                주차장
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="샤워실" id="facility02">
-            <label class="form-check-label" for="facility02">
-                샤워실
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="라커룸" id="facility03">
-            <label class="form-check-label" for="facility03">
-                라커룸
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="wifi" id="facility04">
-            <label class="form-check-label" for="facility04">
-                wifi
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="냉난방시설" id="facility05">
-            <label class="form-check-label" for="facility05">
-                냉난방시설
-            </label>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">설명</label>
-            <textarea class="form-control" th:field="*{description}" id="description" placeholder="설명을 작성해주세요"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="formFileMultiple" class="form-label">메인이미지</label>
-            <input class="form-control" type="file" id="formFileMultiple" name="fitMainFile" multiple required>
-        </div>
-        <div class="mb-3">
-            <label for="formFileMultiple2" class="form-label">서브이미지</label>
-            <input class="form-control" type="file" id="formFileMultiple2" name="fitSubFile" multiple required>
-        </div>
-        <button type="submit" class="btn btn-outline-secondary">등록하기</button>
-    </form>
+    <div id="registerFormDiv">
+        <form th:action="@{/fit/register}" th:object="${fitDTO}" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="name" class="form-label">이름</label>
+                <input type="text" class="form-control" th:field="*{name}" id="name">
+            </div>
+            <div class="mb-3">
+                <label for="openTime" class="form-label">여는시각</label>
+                <input type="time" class="form-control" th:field="*{openTime}" id="openTime">
+            </div>
+            <div class="mb-3">
+                <label for="closeTime" class="form-label">닫는시각</label>
+                <input type="time" class="form-control" th:field="*{closeTime}" id="closeTime">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">주소</label>
+                <p><input style="width : 200px;" type="text" id="sample6_postcode" th:field="*{post}" placeholder="우편번호">
+                    <input type="button" class="btn btn-outline-secondary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></p>
+                <p><input type="text" id="sample6_address" th:field="*{addr}" placeholder="주소"></p>
+                <p><input type="text" id="sample6_detailAddress" th:field="*{addrDetail}" placeholder="상세주소"></p>
+                <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">내부/외부</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" th:field="*{indoorOutdoor}" id="in" value="실내" checked>
+                    <label class="form-check-label" for="in">
+                        실내
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" th:field="*{indoorOutdoor}" id="out" value="실외">
+                    <label class="form-check-label" for="out">
+                        실외
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">편의시설</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="주차장" id="facility01" checked>
+                    <label class="form-check-label" for="facility01">
+                        주차장
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="샤워실" id="facility02">
+                    <label class="form-check-label" for="facility02">
+                        샤워실
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="라커룸" id="facility03">
+                    <label class="form-check-label" for="facility03">
+                        라커룸
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="wifi" id="facility04">
+                    <label class="form-check-label" for="facility04">
+                        WI-FI
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:field=*{facilityTypes} value="냉난방시설" id="facility05">
+                    <label class="form-check-label" for="facility05">
+                        냉난방시설
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">설명</label>
+                <textarea class="form-control" th:field="*{description}" id="description" placeholder="설명을 작성해주세요"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">메인이미지</label>
+                <input class="form-control" type="file" id="formFileMultiple" name="fitMainFile" multiple required>
+            </div>
+            <div class="mb-3">
+                <label for="formFileMultiple2" class="form-label">서브이미지</label>
+                <input class="form-control" type="file" id="formFileMultiple2" name="fitSubFile" multiple required>
+            </div>
+            <div class="mb-3">
+                <label for="latitude" class="form-label">위도</label>
+                <input type="text" class="form-control" th:field="*{latitude}" id="latitude">
+            </div>
+            <div class="mb-3">
+                <label for="longitude" class="form-label">경도</label>
+                <input type="text" class="form-control" th:field="*{longitude}" id="longitude">
+            </div>
+            <button type="submit" class="btn btn-outline-secondary">등록하기</button>
+        </form>
+    </div>
 </body>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
