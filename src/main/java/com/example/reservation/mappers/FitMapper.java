@@ -45,6 +45,6 @@ public interface FitMapper {
 
     public int cntFit(FitDTO fitDTO);
 
-    // 체육시설 검색
-    // public List<FitDTO> searchListFit(Map<String, Object> params);
+    // 서브이미지 가져오기
+    public List<String> subFile(Long mainFileNum);
 }

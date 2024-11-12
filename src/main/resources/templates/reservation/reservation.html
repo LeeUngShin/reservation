@@ -8,8 +8,8 @@
 </th:block>
 <section>
     <th:block layout:fragment="content">
-        <div th:text="${fitDTO}"></div>
-        <div th:text="${timeList}"></div>
+        <!--<div th:text="${fitDTO}"></div>-->
+        <!--<div th:text="${timeList}"></div>-->
         <div id="dateTime">
             <div class="calendar">
                 <div class="calendar-header">
@@ -28,15 +28,15 @@
                         <div class="calendar-weekday">Sat</div>
                     </div>
                 </div>
-                <button type="button" id="testButton">클릭</button>
+                <!--<button type="button" id="testButton">클릭</button>-->
             </div>
             <div>
                 <div class="time-container" id="timeContainer">
 
                 </div>
-                <div id="timeTestButton">시간확인</div>
+                <!--<div id="timeTestButton">시간확인</div>-->
             </div>
-            <button id="submit" type="button">날짜시간제출</button>
+            <!--<button id="submit" type="button">날짜시간제출</button>-->
 
             <form action="/reservation/reservationSubmit" method="post" id="reservationForm">
                 <input type="hidden" name="gymNum" th:value="${fitDTO.num}" id="gymNum">
@@ -45,8 +45,9 @@
                 <input type="hidden" name="reservationStartTime" id="reservationStartTime">
                 <input type="hidden" name="reservationEndTime" id="reservationEndTime">
                 <div class="mb-3">
-                    <label for="personCnt" class="form-label">인원</label>
-                    <input type="text" class="form-control" name="personCnt" id="personCnt" value="1">
+                    <label for="personCnt" class="form-label">인원(최대 </label>
+                    <span th:text="${fitDTO.maxCnt}"></span>명)
+                    <input type="text" class="form-control" name="personCnt" id="personCnt" value="1" onchange="return personCntCheck()">
                 </div>
                 <button id="transform" type="button">제출</button>
             </form>

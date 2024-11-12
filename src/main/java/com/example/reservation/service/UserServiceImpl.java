@@ -26,6 +26,8 @@ public class UserServiceImpl implements UserService{
         return false;
     }
 
+
+
     @Override
     public boolean loginUser(LoginDTO loginDTO, HttpSession session) {
 
@@ -86,5 +88,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserDTO> getUserList() {
         return null;
+    }
+
+    @Override
+    public boolean existsUser(String id) {
+        int result = userMapper.existsUser(id);
+        if(result>=1){
+            return true;
+        }
+        return false;
     }
 }

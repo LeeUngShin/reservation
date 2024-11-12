@@ -25,10 +25,16 @@
             )
     </insert>
 
-    <select id="reservationTimeInfo" resultType="java.sql.Time" parameterType="long">
-        select reservation.reservation_start_time
-        from gym
-        inner join reservation
-        on gym.num = reservation.gym_num;
+    <select id="reservationTimeInfo" resultType="java.sql.Time" parameterType="map">
+        select
+            reservation.reservation_start_time
+        from
+            gym
+        inner join
+            reservation
+        on
+            reservation.gym_num = #{num}
+        where
+            reservation.reservation_date = #{day};
     </select>
 </mapper>

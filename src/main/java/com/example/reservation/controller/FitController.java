@@ -93,11 +93,11 @@ public class FitController extends UiUtils {
         model.addAttribute("requestURI", request.getRequestURI());
         System.out.println("핏디티오리스트 : " +  fitDTOList);
         System.out.println("리퀘스트URI : " + request.getRequestURI());
-        return "test";
+        return "fit/fitList";
     }
 
-    @GetMapping("/fitInfo")
-    public String fitInfo(@RequestParam(value = "num", required = false) Long num,
+    @GetMapping("/fitInfo/{num}")
+    public String fitInfo(@PathVariable(value = "num", required = false) Long num,
                           Model model){
 
         if(num==null){

@@ -6,15 +6,23 @@ import com.example.reservation.domain.ReservationDTO;
 import com.example.reservation.service.FitService;
 import com.example.reservation.service.ReservationService;
 import com.example.reservation.utils.UiUtils;
+import com.google.gson.Gson;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.google.gson.Gson;
+
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/reservation")
@@ -32,7 +40,13 @@ public class ReservationController extends UiUtils {
         FitDTO fitDTO = fitService.fitInfo(num);
         System.out.println("가져온 fitDTO : " + fitDTO);
         model.addAttribute("fitDTO", fitDTO);
-        List<Time> timeList = reservationService.reservationTimeInfo(num);
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = today.format(formatter);
+        Map<String, Object> map = new HashMap<>();
+        map.put("num", fitDTO.getNum());
+        map.put("day", formattedDate);
+        List<Time> timeList = reservationService.reservationTimeInfo(map);
         model.addAttribute("timeList", timeList);
         List<String> listTest = new ArrayList<>();
         listTest.add("aa");
@@ -42,6 +56,22 @@ public class ReservationController extends UiUtils {
         model.addAttribute("reservationDTO", reservationDTO);
 
         return "reservation/reservation";
+    }
+
+
+    @GetMapping("/selectDay")
+    @ResponseBody
+    public String selectDay(@RequestParam("gymNum") String num,
+                        @RequestParam("selectedDay") String selectedDay){
+        System.out.println("짐번호 : " + num);
+        System.out.println("선택 날짜 : " + selectedDay);
+        Map map = new HashMap();
+        map.put("num", num);
+        map.put("day", selectedDay);
+        List<Time> list = new ArrayList<>();
+        list = reservationService.reservationTimeInfo(map);
+        String json = new Gson().toJson(list);
+        return json;
     }
 
     @PostMapping("/reservationSubmit")

@@ -14,7 +14,9 @@
         description,
         fileAttached,
         latitude,
-        longitude
+        longitude,
+        max_cnt,
+        price_per_hour
     </sql>
 
     <!--fit 등록 -->
@@ -28,8 +30,8 @@
             (
             #{num}, #{name}, #{post}, #{addr}, #{addrDetail},
             #{indoorOutdoor}, #{openTime}, #{closeTime},
-            #{description}, #{fileAttached}, #{longitude},
-            #{longitude}
+            #{description}, #{fileAttached}, #{latitude},
+            #{longitude}, #{maxCnt}, #{pricePerHour}
         )
     </insert>
 
@@ -65,7 +67,8 @@
     <select id="selectFit" parameterType="Long" resultType="FitDTO">
         select
             g.num, g.name, g.post, g.addr, g.addrDetail, g.open_time, g.close_time, g.description , g.indoor_outdoor,
-            delete_yn, ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr, fileAttached
+            delete_yn, ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr, fileAttached,
+            g.latitude, g.longitude, g.max_cnt, g.price_per_hour
         from
             gym g
         left join
@@ -128,10 +131,12 @@
     </update>
 
     <select id="listFit" resultType="FitDTO" parameterType="FitDTO">
-        select
+        select * from
+        (select
             g.num, g.name, g.post, g.addr, g.addrDetail, g.open_time, g.close_time, g.description , g.indoor_outdoor,
             ifNULL(group_concat(ff.type), "편의시설없음") as facilityTypesStr,
-            latitude, longitude, fileAttached
+            latitude, longitude, fileAttached, max_cnt, price_per_hour,
+            subString_index(g.addr, ' ', 2) as addrSimple
         from
             gym g
         left join
@@ -143,8 +148,8 @@
             g.num = ff.gym_num
         where
             g.delete_yn = 'N'
-        <if test="bigRegion == null or bigRegion == ''
-            and smallRegion == null or smallRegion == ''
+        <if test="bigRegion == null and bigRegion == ''
+            and smallRegion == null and smallRegion == ''
             and choiceType != null and choiceType != ''">
             AND g.indoor_outdoor = #{choiceType}
         </if>
@@ -159,9 +164,18 @@
         </if>
 
         group by
-            g.num
-        order by
-            g.num desc
+            g.num) gff
+        left join
+            (select fm.num as mainFileNum, fm.fit_num, fm.stored_file_name as mainFilePath
+                from
+                    fit_mainfile fm
+                inner join
+                    fit_subfile fs
+                on
+                    fm.num = fs.mainFile_num) fms
+        on
+            gff.num = fms.fit_num
+        group by gff.num
         limit
             #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
@@ -173,14 +187,14 @@
             gym
         where
             delete_yn = 'N'
-        <if test="bigRegion == null or bigRegion == ''
-            and smallRegion == null or smallRegion == ''
-            and choiceType != null and choiceType != ''">
+        <if test="(bigRegion == null and bigRegion == '')
+            and (smallRegion == null and smallRegion == '')
+            and (choiceType != null and choiceType != '')">
             AND indoor_outdoor = #{choiceType}
         </if>
-        <if test="bigRegion != null and bigRegion != ''
-            and smallRegion != null and smallRegion != ''
-            and choiceType != null and choiceType != ''">
+        <if test="(bigRegion != null and bigRegion != '')
+            and (smallRegion != null and smallRegion != '')
+            and (choiceType != null and choiceType != '')">
             AND (
             addr like concat('%', #{bigRegion}, '%')
             and addr like concat('%', #{smallRegion}, '%')
@@ -188,6 +202,15 @@
             )
         </if>
     </select>
+    <select id="subFile" resultType="java.lang.String" parameterType="Long">
+        select
+            stored_file_name
+        from
+            fit_subfile
+        where
+            mainFile_num = #{mainFileNum}
+    </select>
+
 </mapper>
 
 

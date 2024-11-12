@@ -3,44 +3,47 @@
 <body th:fragment="main-body">
     <div id="container">
       <header>
-        <div id="logo">
-          로고
+        <div id="logo" style="width : 200px;">
+          <a th:href="@{/home}">
+            <img th:src="@{/img/logoEdit.png}" style="width : 100%;">
+          </a>
         </div>
         <div th:if="${session.num == null}"> <!--비로그인-->
           <div id="loginButton">
-            <a class="btn btn-outline-secondary" href="user/loginForm" role="button">
+            <a class="btn btn-outline-secondary" th:href="@{/user/loginForm}" role="button">
               <i class="bi bi-person-fill"></i>
               로그인
             </a>
           </div>
         </div>
         <div th:if="${session.num != null and session.role == 'USER'}">
-          <a class="btn btn-outline-secondary" th:href="@{user/updateForm(num=${session.num})}" role="button">
+          <a class="btn btn-outline-secondary" th:href="@{/user/updateForm(num=${session.num})}" role="button">
             <i class="bi bi-person-fill"></i>
             내정보
           </a>
-          <a class="btn btn-outline-secondary" href="user/logout" role="button">
+          <a class="btn btn-outline-secondary" href="/user/logout" role="button">
             <i class="bi bi-person-fill"></i>
             로그아웃
           </a>
         </div>
         <div th:if="${session.num != null and session.role == 'ADMIN'}">
-          <a class="btn btn-outline-secondary" th:href="@{user/updateForm(num=${session.num})}" role="button">
+          <a class="btn btn-outline-secondary" th:href="@{/user/updateForm(num=${session.num})}" role="button">
             <i class="bi bi-person-fill"></i>
             내정보
           </a>
-          <a class="btn btn-outline-secondary" href="user/logout" role="button">
+          <a class="btn btn-outline-secondary" href="/user/logout" role="button">
             <i class="bi bi-person-fill"></i>
             로그아웃
           </a>
-          <a class="btn btn-outline-secondary" th:href="@{fit/registerForm}" role="button">
+          <a class="btn btn-outline-secondary" th:href="@{/fit/registerForm}" role="button">
             등록하기
           </a>
         </div>
       </header>
-      <nav> <!-- -->
+      <hr style="margin-bottom : 50px;">
+      <!--<nav>
         메뉴바 부분입니다.
-      </nav>
+      </nav>-->
       <section id="section">
         <th:block layout:fragment="content"></th:block>
         <th:block layout:fragment="add-content1"></th:block>

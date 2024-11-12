@@ -97,6 +97,14 @@
                 <label for="longitude" class="form-label">경도</label>
                 <input type="text" class="form-control" th:field="*{longitude}" id="longitude">
             </div>
+            <div class="mb-3">
+                <label for="pricePerHour" class="form-label">1시간 기준 가격</label>
+                <input type="number" class="form-control" th:field="*{pricePerHour}" id="pricePerHour">
+            </div>
+            <div class="mb-3">
+                <label for="maxCnt" class="form-label">최대 수용인원</label>
+                <input type="number" class="form-control" th:field="*{maxCnt}" id="maxCnt">
+            </div>
             <button type="submit" class="btn btn-outline-secondary">등록하기</button>
         </form>
     </div>

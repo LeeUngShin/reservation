@@ -6,14 +6,15 @@ import com.example.reservation.domain.UserDTO;
 import com.example.reservation.service.UserService;
 import com.example.reservation.utils.UiUtils;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -23,15 +24,28 @@ public class UserController extends UiUtils {
     private UserService userService;
 
     @GetMapping("/joinForm")
-    public String joinForm(){
+    public String joinForm(Model model){
 
+        UserDTO userDTO = new UserDTO();
+        model.addAttribute("userDTO", userDTO);
         return "user/join";
     }
 
     @PostMapping("/join")
-    public String join(UserDTO userDTO, Model model){
+    public String join(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult bindingResult, Model model){
         System.out.println("회원가입때 들어온 정보 : " + userDTO);
         try {
+            boolean duplicateId = userService.existsUser(userDTO.getId());
+            if(duplicateId){
+                System.out.println("중복된 아이디가 있음");
+                bindingResult.rejectValue("id", "error.id", "중복된 아이디가 있습니다.");
+            }
+            if(bindingResult.hasErrors()){
+                System.out.println("-----------------------");
+                System.out.println("bindingResult : " + bindingResult);
+                System.out.println("-----------------------");
+                return "user/join";
+            }
             boolean joinResult = userService.registerUser(userDTO);
             if (joinResult) {
                 return showMessageWithRedirect("회원가입에 성공했습니다.", "/user/loginForm", Method.GET, null, model);
@@ -53,7 +67,7 @@ public class UserController extends UiUtils {
     }
 
     @PostMapping("/login")
-    public String login(LoginDTO loginDTO, Model model,
+    public String login(@ModelAttribute LoginDTO loginDTO, Model model,
                         HttpSession session){
 
         System.out.println("로그인 때 들어온 정보 : " + loginDTO);

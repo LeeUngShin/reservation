@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReservationImpl implements ReservationService{
@@ -25,12 +26,10 @@ public class ReservationImpl implements ReservationService{
     }
 
     @Override
-    public List<Time> reservationTimeInfo(Long gymNum) {
+    public List<Time> reservationTimeInfo(Map map) {
 
-        List<Time> timeList = reservationMapper.reservationTimeInfo(gymNum);
+        List<Time> timeList = reservationMapper.reservationTimeInfo(map);
 
         return timeList;
     }
-
-
 }

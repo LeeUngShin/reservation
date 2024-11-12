@@ -19,4 +19,6 @@ public interface UserService {
     public boolean deleteUser(Long num);
 
     public List<UserDTO> getUserList();
+
+    public boolean existsUser(String id);
 }

@@ -13,6 +13,7 @@ public class UserDTO extends CommonDTO{
     private Long num;
     private String id;
     private String pw;
+    private String confirm_password;
     private String name;
     private String email;
     private String post;

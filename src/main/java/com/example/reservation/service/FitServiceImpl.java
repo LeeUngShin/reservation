@@ -135,7 +135,7 @@ public class FitServiceImpl implements FitService{
         return list;
     }*/
 
-    @Override  // 전체 리스트 (페이징처리X)
+    @Override  // 전체 리스트
     public List<FitDTO> listFit(FitDTO fitDTO) {
 
         List<FitDTO> fitDTOList = new ArrayList<>();

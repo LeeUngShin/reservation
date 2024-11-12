@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
 <th:block layout:fragment="add-css">
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fit/fit.css}"/>
 </th:block>
 <th:block layout:fragment="title">
     <title>핏인포</title>
@@ -9,28 +9,102 @@
 
 <section>
     <th:block layout:fragment="content">
-        <div th:text="${fitDTO}"></div>
-        <div th:text="${fitDTO.description}"></div>
-        <div th:if = "${fitDTO.fileAttached==1}">
-            <div>
-                <img th:src="@{|/upload/${fitMainFileDTO.storedFileName}|}" alt="" width="200" height="200">
+        <div th:if = "${fitDTO.fileAttached==1}" id="imgLayout">
+            <div style="height : 400px;">
+                <!--<img th:src="@{|/upload/${fitMainFileDTO.storedFileName}|}" alt="" class="mainImg">-->
+                <img th:src="@{/upload/1.jpg}" alt="" class="mainImg">
             </div>
-            <hr>
-            <div th:each="fitFileDTO : ${fitSubFileDTOList}">
-                <img th:src="@{|/upload/${fitFileDTO.storedFileName}|}" alt="" width="200" height="200">
+            <div id="subImgDiv">
+                <!--<th:block th:each="fitFileDTO : ${fitSubFileDTOList}">
+                    <img th:src="@{|/upload/${fitFileDTO.storedFileName}|}" alt="" class="subImg">
+                </th:block>-->
+                <img th:src="@{/upload/2.jpg}" alt="" class="subImg">
+                <img th:src="@{/upload/3.jpg}" alt="" class="subImg">
+                <img th:src="@{/upload/4.jpg}" alt="" class="subImg">
+                <img th:src="@{/upload/5.jpg}" alt="" class="subImg">
             </div>
-
+        </div>
+        <div id="fitInfo_reserveButton">
+            <div id="fitInfo">
+                <div>
+                    <h3 style="font-weight : bold">[<span id="firstAddr"></span>]
+                    <span th:text="${fitDTO.name}"></span></h3>
+                </div>
+                <div>
+                    <i class="bi bi-pin-map-fill"></i>
+                    <span th:text="${fitDTO.addr}"></span>
+                    <span th:text="${fitDTO.addrDetail}"></span>
+                </div>
+                <div>
+                    <span>공간 정보 : </span>
+                    <span th:text="${fitDTO.facilityTypesStr}"></span>
+                </div>
+                <hr>
+                <div th:text="위치" style="font-weight : bold; margin-bottom : 10px;"></div>
+                <div id="map" style="width:100%;height:350px;"></div>
+            </div>
+            <div id="reserveButton">
+                <div>
+                    <div style="margin-bottom : 10px"><span th:text="${fitDTO.pricePerHour + '원'}" class="reserveButtonInfo"></span> / 1시간</div>
+                    <div style="margin-bottom : 10px"><span th:text="${fitDTO.maxCnt + '명'}" class="reserveButtonInfo"></span> / 최대수용인원</div>
+                    <div>
+                        <button class="btn btn-secondary" id="reserve">예약하기</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </th:block>
 
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary">Left</button>
-        <button type="button" class="btn btn-primary">Middle</button>
-        <button type="button" class="btn btn-primary">Right</button>
-    </div>
 </section>
 <th:block  layout:fragment="add-script">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abe9fa3882064226f33cf540dd21ef5d"></script>
     <script th:inline="javascript">
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var loginCheck = /*[[${session.num}]]*/ null;
+            var reserveFormGo = document.getElementById("reserve");
+            var fitNum = /*[[${fitDTO.num}]]*/
+
+            reserveFormGo.addEventListener('click', () =>{
+            //alert("loginCheck : " + loginCheck);
+                if (isNaN(loginCheck) || loginCheck === 0 || loginCheck === null || loginCheck === '') {
+                    alert("회원만 접근 가능합니다.");
+                    return false;
+                }
+                location.href= "http://127.0.0.1:8080/reservation/" + fitNum;
+            });
+
+            var addr = /*[[${fitDTO.addr}]]*/
+
+            var firstAddr = addr.split(" ")[0];
+            document.getElementById("firstAddr").textContent = firstAddr;
+            var latitude = /*[[${fitDTO.latitude}]]*/
+            var longitude = /*[[${fitDTO.longitude}]]*/
+            console.log(latitude);
+            console.log(longitude);
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+            center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+            };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+            // 마커가 표시될 위치입니다
+            var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
+
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+            position: markerPosition
+            });
+
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+
+            // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+            // marker.setMap(null);
+            });
     </script>
 </th:block>
 

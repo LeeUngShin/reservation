@@ -5,13 +5,13 @@
     const typeChoice = document.getElementById('typeChoice');
     const type = document.getElementById('type');
 
-    function initializePage() {
-        alert(regionChoice);
-        alert(bigRegion);
-        alert(smallRegion);
-        alert(typeChoice);
-        alert(type);
-    }
+//    function initializePage() {
+//        alert(regionChoice);
+//        alert(bigRegion);
+//        alert(smallRegion);
+//        alert(typeChoice);
+//        alert(type);
+//    }
 
     window.onload = function() {
         initializePage();
@@ -134,6 +134,7 @@ function submitChoice(form){
     //if(selectedType === '전체') selectedType = "";
     if(selectedType === '실내') selectedType = '실내';
     if(selectedType === '실외') selectedType = '실외';
+    if(selectedType === "유형선택") selectedType = '';
 
     if(bigRegion === '' || smallRegion === '' || selectedType === ''){
         alert("지역과 유형을 선택하세요!");

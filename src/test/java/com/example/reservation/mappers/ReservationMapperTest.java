@@ -36,12 +36,12 @@ class ReservationMapperTest {
         
     }
 
-    @Test
-    void reservationInfo() {
-
-        List<Time> timeList = reservationMapper.reservationTimeInfo(10L);
-        System.out.println("---------------------");
-        System.out.println(timeList);
-        System.out.println("---------------------");
-    }
+//    @Test
+//    void reservationInfo() {
+//
+//        List<Time> timeList = reservationMapper.reservationTimeInfo(10L);
+//        System.out.println("---------------------");
+//        System.out.println(timeList);
+//        System.out.println("---------------------");
+//    }
 }

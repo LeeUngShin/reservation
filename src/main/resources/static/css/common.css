@@ -9,12 +9,12 @@ body{
 }
 
 header{
-    background-color : blue;
-    flex-basis : 100px;
+    margin-top : 20px;
+    flex-basis : 80px;
     display : flex;
     align-items : center;
     justify-content : space-between;
-    padding : 0 30px;  /*상하 좌우*/
+    padding : 0 50px;  /*상하 좌우*/
 }
 
 textarea.form-control {
@@ -32,8 +32,10 @@ textarea.form-control {
 footer{
     background-color : black;
     height : 150px;
+    margin-top : 100px;
 }
 
 #section{
     flex-grow : 1;
 }
+

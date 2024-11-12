@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ReservationMapper {
@@ -13,5 +14,5 @@ public interface ReservationMapper {
     public int insertReservation(ReservationDTO reservationDTO);
 
     // 예약시간정보
-    public List<Time> reservationTimeInfo(Long gymNum);
+    public List<Time> reservationTimeInfo(Map map);
 }
