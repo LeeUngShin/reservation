@@ -62,7 +62,7 @@
                         <input type="hidden" name="pageSize" th:value="${fitDTO.pageSize}" />
                         <input type="hidden" name="bigRegion" id="bigRegionInput" />
                         <input type="hidden" name="smallRegion" id="smallRegionInput" />
-                        <input type="hidden" name="choiceType" id="choiceTypeInput" />
+                        <input type="hidden" name="indoorOutdoor" id="indoorOutdoorInput" />
                         <div class="col">
                             <button type="submit" class="btn btn-light" style="width : 80%;">검색하기</button>
                         </div>
@@ -100,7 +100,7 @@
                                         <li>#실내운동</li>
                                     </ul>
                                 </p>
-                                <a th:href="|@{/fit/fitList}${fitDTO.makeChoice2QueryString(fitDTO.currentPageNo)}&choiceType=실내|" class="btn btn-light">공간 보러가기</a>
+                                <a th:href="|@{/fit/fitList}${fitDTO.makeChoice2QueryString(fitDTO.currentPageNo)}&indoorOutdoor=실내|" class="btn btn-light">공간 보러가기</a>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                                         <li>#실외운동</li>
                                     </ul>
                                 </p>
-                                <a th:href="|@{/fit/fitList}${fitDTO.makeChoice2QueryString(fitDTO.currentPageNo)}&choiceType=실외|" class="btn btn-light">공간 보러가기</a>
+                                <a th:href="|@{/fit/fitList}${fitDTO.makeChoice2QueryString(fitDTO.currentPageNo)}&indoorOutdoor=실외|" class="btn btn-light">공간 보러가기</a>
                             </div>
                         </div>
                     </div>

@@ -148,18 +148,18 @@
             g.num = ff.gym_num
         where
             g.delete_yn = 'N'
-        <if test="bigRegion == null and bigRegion == ''
-            and smallRegion == null and smallRegion == ''
-            and choiceType != null and choiceType != ''">
-            AND g.indoor_outdoor = #{choiceType}
+        <if test="bigRegion == null or bigRegion == ''
+            and smallRegion == null or smallRegion == ''
+            and indoorOutdoor != null and indoorOutdoor != ''">
+            AND g.indoor_outdoor = #{indoorOutdoor}
         </if>
-        <if test="bigRegion != null and bigRegion != ''
-            and smallRegion != null and smallRegion != ''
-            and choiceType != null and choiceType != ''">
+        <if test="bigRegion != null or bigRegion != ''
+            and smallRegion != null or smallRegion != ''
+            and indoorOutdoor != null and indoorOutdoor != ''">
             AND (
             g.addr like concat('%', #{bigRegion}, '%')
             and g.addr like concat('%', #{smallRegion}, '%')
-            and g.indoor_outdoor = #{choiceType}
+            and g.indoor_outdoor = #{indoorOutdoor}
             )
         </if>
 
@@ -187,18 +187,18 @@
             gym
         where
             delete_yn = 'N'
-        <if test="(bigRegion == null and bigRegion == '')
-            and (smallRegion == null and smallRegion == '')
-            and (choiceType != null and choiceType != '')">
-            AND indoor_outdoor = #{choiceType}
-        </if>
-        <if test="(bigRegion != null and bigRegion != '')
-            and (smallRegion != null and smallRegion != '')
-            and (choiceType != null and choiceType != '')">
+            <if test="(bigRegion == null or bigRegion == '')
+                and (smallRegion == null or smallRegion == '')
+                and (indoorOutdoor != null and indoorOutdoor != '')">
+                AND indoor_outdoor = #{indoorOutdoor}
+            </if>
+        <if test="(bigRegion != null or bigRegion != '')
+            and (smallRegion != null or smallRegion != '')
+            and (indoorOutdoor != null and indoorOutdoor != '')">
             AND (
             addr like concat('%', #{bigRegion}, '%')
             and addr like concat('%', #{smallRegion}, '%')
-            and indoor_outdoor = #{choiceType}
+            and indoor_outdoor = #{indoorOutdoor}
             )
         </if>
     </select>

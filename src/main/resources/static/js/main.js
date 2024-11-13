@@ -145,7 +145,7 @@ function submitChoice(form){
     bigRegionInput.value = bigRegion;
     var smallRegionInput = document.getElementById("smallRegionInput");
     smallRegionInput.value = smallRegion
-    var choiceTypeInput = document.getElementById("choiceTypeInput");
+    var choiceTypeInput = document.getElementById("indoorOutdoorInput");
     choiceTypeInput.value = selectedType;
     //var url = `/fit/fitList?bigRegion=${encodeURIComponent(bigRegion)}&smallRegion=${encodeURIComponent(smallRegion)}&choiceType=${encodeURIComponent(selectedType)}`;
     form.submit();

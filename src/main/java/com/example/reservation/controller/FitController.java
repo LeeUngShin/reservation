@@ -82,6 +82,9 @@ public class FitController extends UiUtils {
     public String fitList(@ModelAttribute("fitDTO") FitDTO fitDTO,
                           HttpServletRequest request, Model model){
 
+        System.out.println("리스트 검색시 : " + fitDTO);
+        System.out.println("빅리전 : " + fitDTO.getBigRegion());
+        System.out.println("스몰리전 : " + fitDTO.getSmallRegion());
         List<FitDTO> fitDTOList = fitService.listFit(fitDTO);
         System.out.println("컨트롤러 왔을 때 페이징 : " + fitDTO.getPaginationInfo());
         System.out.println("컨트롤러 왔을 때 현재페이지 : " + fitDTO.getCurrentPageNo());

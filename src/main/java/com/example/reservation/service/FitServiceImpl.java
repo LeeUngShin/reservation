@@ -140,7 +140,7 @@ public class FitServiceImpl implements FitService{
 
         List<FitDTO> fitDTOList = new ArrayList<>();
         int fitTotalCnt = fitMapper.cntFit(fitDTO);
-        System.out.println("choiceType : " + fitDTO.getChoiceType());
+        System.out.println("indoorOutdoor : " + fitDTO.getIndoorOutdoor());
         System.out.println("count : " + fitTotalCnt);
 
         PaginationInfo paginationInfo = new PaginationInfo(fitDTO);

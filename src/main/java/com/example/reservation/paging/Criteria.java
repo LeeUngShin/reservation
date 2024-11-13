@@ -17,7 +17,7 @@ public class Criteria {
     //private String searchType;
     private String bigRegion;
     private String smallRegion;
-    private String choiceType;
+    private String indoorOutdoor;
 
     public Criteria() {
         this.currentPageNo = 1;
@@ -54,7 +54,7 @@ public class Criteria {
                 .queryParam("pageSize", pageSize)
                 .queryParam("bigRegion", bigRegion)
                 .queryParam("smallRegion", smallRegion)
-                .queryParam("choiceType", choiceType)
+                .queryParam("indoorOutdoor", indoorOutdoor)
                 .build().encode();
         System.out.println(">>>>>>>>>>"+uriComponents.toUriString());
         return uriComponents.toUriString();
